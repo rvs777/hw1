@@ -68,66 +68,111 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 DROP TABLE IF EXISTS My_Movies;
-DROP TABLE IF EXISTS My_Cast;
+DROP TABLE IF EXISTS My_People;
+DROP TABLE IF EXISTS My_Role;
 
 -- Create new tables, according to your domain model
 CREATE TABLE My_Movies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     movie_name TEXT,
     release_year INTEGER,
-    rating TEXT,
-    director_name TEXT
+    rating TEXT
+   
 );
 
-CREATE TABLE My_Cast (
+CREATE TABLE My_People (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    movie_id INTEGER,
-    actors_name TEXT,
-    roles_name TEXT
+    person_name TEXT
 );
+
+CREATE TABLE My_Role (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role_name TEXT,
+    people_id INTEGER,
+    movie_id INTEGER   
+);
+
+
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
-INSERT INTO My_Movies (id,movie_name, release_year, rating, director_name)
-VALUES (1,'Batman Begins', 2005,'PG-13','christopher Nolan');
-INSERT INTO My_Movies (id,movie_name, release_year, rating, director_name)
-VALUES (2,'The Dark Knight', 2008,'PG-13','christopher Nolan');
-INSERT INTO My_Movies (id,movie_name, release_year, rating, director_name)
-VALUES (3,'The Dark Knight Rises', 2012,'PG-13','christopher Nolan');
+INSERT INTO My_Movies (id,movie_name, release_year, rating)
+VALUES (1,'Batman Begins', 2005,'PG-13');
+INSERT INTO My_Movies (id,movie_name, release_year, rating)
+VALUES (2,'The Dark Knight', 2008,'PG-13');
+INSERT INTO My_Movies (id,movie_name, release_year, rating)
+VALUES (3,'The Dark Knight Rises', 2012,'PG-13');
 
 
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (1,1, 'Christian Bale','Bruce Wayne');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (2,1, 'Michael Caine','Alfred Pennyworth');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (3,1, 'Liam Neeson','Ras al Ghul');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (4,1, 'Katie Holmes','Rachel Dawes');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (5,1, 'Gary Oldman','Commissioner Gordon');
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (1,'Bruce Wayne',1,1);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (2,'Alfred Pennyworth',2,1);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (3,'Ras al Ghul',3,1);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (4,'Rachel Dawes',4,1);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (5,'Commissioner Gordon',5,1);
 
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (6,2, 'Christian Bale','Bruce Wayne');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (7,2, 'Heath Ledger','Joker');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (8,2, 'Aaron Eckhart','Harvey Dent');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (9,2, 'Michael Caine','Alfred Pennyworth');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (10,2, 'Maggie Gyllenhaal','Rachel Dawes');
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (6,'Bruce Wayne',1,2);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (7,'Joker',6,2);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (8,'Harvey Dent',7,2);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (9,'Alfred Pennyworth',2,2);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (10,'Rachel Dawes',8,2);
 
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (11,3, 'Christian Bale','Bruce Wayne');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (12,3, 'Gary Oldman','Commissioner Gordon');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (13,3, 'Tom Hardy','Bane');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (14,3, 'Joseph Gordon-Levitt','John Blake');
-INSERT INTO My_Cast (id,movie_id, actors_name, roles_name)
-VALUES (15,3,'Anne Hathaway', 'Selina Kyle' );
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (11,'Bruce Wayne',1,3);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (12,'Commissioner Gordon',5,3);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (13,'Bane',9,3);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (14,'John Blake',10,3);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (15,'Selina Kyle',11,3);
+
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (16,'Director',12,1);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (17,'Director',12,2);
+INSERT INTO My_Role (id,role_name,people_id, movie_id)
+VALUES (18,'Director',12,3);
+
+
+
+INSERT INTO My_People (id,person_name)
+VALUES (1,'Christian Bale');
+INSERT INTO My_People (id,person_name)
+VALUES (2,'Michael Caine');
+INSERT INTO My_People (id,person_name)
+VALUES (3,'Liam Neeson');
+INSERT INTO My_People (id,person_name)
+VALUES (4,'Katie Holmes');
+INSERT INTO My_People (id,person_name)
+VALUES (5,'Gary Oldman');
+INSERT INTO My_People (id,person_name)
+VALUES (6,'Heather Ledger');
+INSERT INTO My_People (id,person_name)
+VALUES (7,'Aaron Eckhart');
+INSERT INTO My_People (id,person_name)
+VALUES (8,'Maggie Gyllenhaal');
+INSERT INTO My_People (id,person_name)
+VALUES (9,'Tom Hardy');
+INSERT INTO My_People (id,person_name)
+VALUES (10,'Joseph Gordon-levitt');
+INSERT INTO My_People (id,person_name)
+VALUES (11,'Anne Hathaway');
+INSERT INTO My_People (id,person_name)
+VALUES (12,'Christopher Nolan');
+
+
+
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -135,7 +180,10 @@ VALUES (15,3,'Anne Hathaway', 'Selina Kyle' );
 .print ""
 
 -- The SQL statement for the movies output
-SELECT movie_name, release_year, rating, director_name FROM My_Movies;
+SELECT movie_name, release_year, rating, person_name FROM My_Movies
+INNER JOIN My_Role ON My_Movies.id =  My_Role.movie_id
+INNER JOIN My_People ON My_People.id = My_Role.people_id WHERE My_Role.role_name = 'Director'
+;
 
 -- Prints a header for the cast output
 .print ""
@@ -145,4 +193,6 @@ SELECT movie_name, release_year, rating, director_name FROM My_Movies;
 
 
 -- The SQL statement for the cast output
-SELECT My_Movies.movie_name, My_Cast.actors_name, My_Cast.roles_name FROM My_Cast INNER JOIN My_Movies ON My_Movies.id = My_Cast.movie_id;
+SELECT movie_name, person_name, role_name FROM My_Movies
+INNER JOIN My_Role ON My_Movies.id =  My_Role.movie_id
+INNER JOIN My_People ON My_People.id = My_Role.people_id WHERE My_Role.role_name != 'Director'
