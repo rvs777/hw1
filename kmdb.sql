@@ -85,6 +85,7 @@ CREATE TABLE My_People (
     person_name TEXT
 );
 
+-- I assume that director can also be seen as playing a "Role" behind camera and so I will input a role called director.
 CREATE TABLE My_Role (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role_name TEXT,
@@ -137,6 +138,7 @@ VALUES (14,'John Blake',10,3);
 INSERT INTO My_Role (id,role_name,people_id, movie_id)
 VALUES (15,'Selina Kyle',11,3);
 
+--- As described above, my assumption is that director is also playing a role in the movie(behind camera) and so inputting his info as well
 INSERT INTO My_Role (id,role_name,people_id, movie_id)
 VALUES (16,'Director',12,1);
 INSERT INTO My_Role (id,role_name,people_id, movie_id)
@@ -168,7 +170,7 @@ INSERT INTO My_People (id,person_name)
 VALUES (10,'Joseph Gordon-levitt');
 INSERT INTO My_People (id,person_name)
 VALUES (11,'Anne Hathaway');
-INSERT INTO My_People (id,person_name)
+INSERT INTO My_People (id,person_name) -- Adding Chris Nolan into people and he will be linked to director role
 VALUES (12,'Christopher Nolan');
 
 
@@ -182,7 +184,7 @@ VALUES (12,'Christopher Nolan');
 -- The SQL statement for the movies output
 SELECT movie_name, release_year, rating, person_name FROM My_Movies
 INNER JOIN My_Role ON My_Movies.id =  My_Role.movie_id
-INNER JOIN My_People ON My_People.id = My_Role.people_id WHERE My_Role.role_name = 'Director'
+INNER JOIN My_People ON My_People.id = My_Role.people_id WHERE My_Role.role_name = 'Director' -- Printing the name which is tied to the role called director
 ;
 
 -- Prints a header for the cast output
@@ -195,4 +197,4 @@ INNER JOIN My_People ON My_People.id = My_Role.people_id WHERE My_Role.role_name
 -- The SQL statement for the cast output
 SELECT movie_name, person_name, role_name FROM My_Movies
 INNER JOIN My_Role ON My_Movies.id =  My_Role.movie_id
-INNER JOIN My_People ON My_People.id = My_Role.people_id WHERE My_Role.role_name != 'Director'
+INNER JOIN My_People ON My_People.id = My_Role.people_id WHERE My_Role.role_name != 'Director' -- Printing ONLY the cast and not director and so excluding his role using a WHERE statement
